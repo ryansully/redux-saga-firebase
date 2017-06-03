@@ -13,12 +13,12 @@ function * signInWithPopup (authProvider) {
   return credential
 }
 
-function * logout () {
+function * signOut () {
   const auth = this.app.auth()
   yield call([auth, auth.signOut])
 }
 
-function authChannel () {
+function channel () {
   if (this._authChannel) return this._authChannel
 
   const auth = this.app.auth()
@@ -36,8 +36,8 @@ function authChannel () {
 }
 
 export default {
-  authChannel,
+  channel,
   signInAnonymously,
   signInWithPopup,
-  logout
+  signOut
 }

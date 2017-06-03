@@ -49,9 +49,9 @@ describe('auth', () => {
     })
   })
 
-  describe('logout()', () => {
+  describe('signOut()', () => {
     it('works', () => {
-      const iterator = authModule.logout.call(context)
+      const iterator = authModule.signOut.call(context)
 
       expect(iterator.next().value)
       .toEqual(call([auth, auth.signOut]))
@@ -63,9 +63,9 @@ describe('auth', () => {
     })
   })
 
-  describe('authChannel()', () => {
+  describe('channel()', () => {
     it('works', () => {
-      const result = authModule.authChannel.call(context)
+      const result = authModule.channel.call(context)
 
       expect(auth.onAuthStateChanged.mock.calls.length).toBe(1)
       expect(context._authChannel).toBe(result)
@@ -73,7 +73,7 @@ describe('auth', () => {
 
     it('returns the cached authChannel if there is one', () => {
       const cachedAuthChannel = 'smldklqd'
-      const result = authModule.authChannel.call({
+      const result = authModule.channel.call({
         ...context,
         _authChannel: cachedAuthChannel
       })
@@ -83,7 +83,7 @@ describe('auth', () => {
     })
 
     it('returns a close-able channel', () => {
-      const channel = authModule.authChannel.call(context)
+      const channel = authModule.channel.call(context)
 
       channel.close()
       expect(unsubscribe.mock.calls.length).toBe(1)
